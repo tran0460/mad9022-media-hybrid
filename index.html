@@ -13,11 +13,11 @@
 </head>
 <body>
     <main>
-        <section id="player-area">
+        <section id="player-area" class="container">
             <div class="visual">
-                <img src="" alt="track-name">
+                <img src="./media/thumbnail/place-holder.jpeg" alt="track-name">
                 <h2 class="track-name">Track name</h2>
-                <p class="artist-name"></p>
+                <p class="artist-name">Cool guy</p>
                 <div id="audio-animation"></div>
             </div>
             <div class="controls">
@@ -50,12 +50,19 @@
                 </div>
             </div>
         </section>
-        <section id="playlist-area">
+        <section id="playlist-area" class="container">
+            <button class="buttons flex">
+                <h2>Next in queue </h2>
+                <span id="skip_next" class="material-icons">chevron_right</span>
+            </button>
             <div class="playlist">
                 <div class="track active">
-                    <img src="" alt="track-name" class="playlist-thumbnail">
-                    <p class="artist-name"></p>
-                    <p class="track-name"></p>
+                    <img src="./media/thumbnail/place-holder.jpeg" alt="track-name" class="playlist-thumbnail">
+                    <div class="track-info">
+                        <p class="track-name">Track Name</p>
+                        <p class="artist-name">Artist Name</p>
+                        <p class="track-length">2:02</p>
+                    </div>
                 </div>
             </div>
         </section>
