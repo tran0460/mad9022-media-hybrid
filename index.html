@@ -11,12 +11,32 @@
     <title>Document</title>
 </head>
 <body>
-    <span class="material-icons-outlined">skip_previous</span>
-    <span class="material-icons-outlined">replay_10</span>
-    <span class="material-icons-outlined">play_arrow</span>
-    <span class="material-icons-outlined">pause</span>
-    <span class="material-icons-outlined">stop</span>
-    <span class="material-icons-outlined">forward_10</span>
-    <span class="material-icons-outlined">skip_next</span>
+    <main>
+        <section id="player-area">
+            <div class="visual">
+                <img src="" alt="song-name">
+                <h2 class="song-name">Song name</h2>
+                <h3 class="artist-name">Artist name</h3>
+                <div id="audio-animation"></div>
+            </div>
+            <div class="controls">
+                <div id="progress-bar">
+                    <input id="length-bar" type="range">
+                </div>
+                <div class="player-buttons">
+                    <span id="skip_previous" class="material-icons-outlined">skip_previous</span>
+                    <span id="replay_10" class="material-icons-outlined">replay_10</span>
+                    <span id="play_arrow" class="material-icons-outlined">play_arrow</span>
+                    <span id="pause" class="material-icons-outlined">pause</span>
+                    <span id="stop" class="material-icons-outlined">stop</span>
+                    <span id="forward_10" class="material-icons-outlined">forward_10</span>
+                    <span id="skip_next" class="material-icons-outlined">skip_next</span>
+                </div>
+            </div>
+        </section>
+        <section id="playlist-area">
+
+        </section>
+    </main>
 </body>
 </html>
