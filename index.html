@@ -8,34 +8,56 @@
     href="https://fonts.googleapis.com/icon?family=Material+Icons"
     rel="stylesheet"
     />
-    <title>Document</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <title>Media Player</title>
 </head>
 <body>
     <main>
         <section id="player-area">
             <div class="visual">
-                <img src="" alt="song-name">
-                <h2 class="song-name">Song name</h2>
-                <h3 class="artist-name">Artist name</h3>
+                <img src="" alt="track-name">
+                <h2 class="track-name">Track name</h2>
+                <p class="artist-name"></p>
                 <div id="audio-animation"></div>
             </div>
             <div class="controls">
                 <div id="progress-bar">
+                    <audio id="player" class="hidden"></audio>
                     <input id="length-bar" type="range">
                 </div>
                 <div class="player-buttons">
-                    <span id="skip_previous" class="material-icons-outlined">skip_previous</span>
-                    <span id="replay_10" class="material-icons-outlined">replay_10</span>
-                    <span id="play_arrow" class="material-icons-outlined">play_arrow</span>
-                    <span id="pause" class="material-icons-outlined">pause</span>
-                    <span id="stop" class="material-icons-outlined">stop</span>
-                    <span id="forward_10" class="material-icons-outlined">forward_10</span>
-                    <span id="skip_next" class="material-icons-outlined">skip_next</span>
+                    <button id="btn" class="buttons">
+                        <span id="skip_previous" class="material-icons">skip_previous</span>
+                    </button>
+                    <button id="btn" class="buttons">
+                        <span id="replay_10" class="material-icons">replay_10</span>
+                    </button>
+                    <button id="btn" class="buttons">
+                        <span id="play_arrow" class="material-icons">play_arrow</span>
+                    </button>
+                    <button id="btn" class="buttons">
+                        <span id="pause" class="material-icons">pause</span>
+                    </button>
+                    <button id="btn" class="buttons">
+                        <span id="stop" class="material-icons">stop</span>
+                    </button>
+                    <button id="btn" class="buttons">
+                        <span id="forward_10" class="material-icons">forward_10</span>
+                    </button>
+                    <button id="btn" class="buttons">
+                        <span id="skip_next" class="material-icons">skip_next</span>
+                    </button>
                 </div>
             </div>
         </section>
         <section id="playlist-area">
-
+            <div class="playlist">
+                <div class="track active">
+                    <img src="" alt="track-name" class="playlist-thumbnail">
+                    <p class="artist-name"></p>
+                    <p class="track-name"></p>
+                </div>
+            </div>
         </section>
     </main>
 </body>

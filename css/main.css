@@ -1,0 +1,33 @@
+html {
+    background-color: #282828;
+    color: #ffff
+}
+/* ---------------------VISUAL--------------------- */
+.hidden {
+    display: none
+}
+
+/* --------------------CONTROLS-------------------- */
+.controls {
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+}
+#progress-bar {
+    width: 80%;
+    margin: auto;
+}
+.controls input {
+    width: 100%
+}
+.controls input:hover {
+    cursor: pointer;
+}
+.buttons {
+    color: #fff;
+    background-color:transparent;
+    border: none;
+}
+.buttons:hover {
+    cursor: pointer;
+}
