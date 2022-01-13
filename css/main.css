@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400&display=swap');
 html {
     background-color: #282828;
-    color: #ffff
+    color: #ffff;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+header h1 {
+    text-align: center;
+    margin: 0;
 }
 .flex {
     display: flex;
@@ -15,6 +21,7 @@ html {
 }
 img {
     width: 100%;
+    max-width: 30em;
 }
 .visual{
     display: flex;
@@ -27,6 +34,10 @@ img {
 h2 {
     margin: 0;
 }
+.artist-name {
+    color: rgba(255,255,255, 0.7);
+    margin: 1rem;
+}
 /* --------------------CONTROLS-------------------- */
 .controls {
     display: flex;
@@ -34,8 +45,12 @@ h2 {
     align-items:center;
 }
 #progress-bar {
+    display: flex;
+    flex-wrap: wrap;
     width: 100%;
     margin: auto;
+    justify-content: space-between;
+    gap: 0.5rem;
 }
 .player-buttons {
     display: flex;
@@ -43,16 +58,22 @@ h2 {
     width: 100%;
     margin: auto;
     justify-content: center;
+    margin: 0.5rem 0;
+}
+#audio-animation {
+    margin: 0.5rem;
+}
+.total-time {
+    align-self: flex-end;
 }
 .controls input {
     width: 100%
 }
 input[type=range] {
-    width: 104%;
+    width: 100%;
     margin: 0.266 0;
     background-color: transparent;
     -webkit-appearance: none;
-    background:rgba(255,255,255, 0.3);
     border: none !important;
     -moz-appearance:initial
   }
@@ -72,7 +93,6 @@ input[type=range] {
     width: 1.1rem;
     height: 1.1rem;
     background: white;
-    border: 0.0875rem solid rgba(0, 0, 0, 0.5);
     border-radius: 1.25rem;
     cursor: pointer;
     -webkit-appearance: none;
@@ -85,7 +105,7 @@ input[type=range] {
     width: 100%;
 
     background:rgba(255,255,255, 0.3);
-    border: 0.013rem solid #010100;
+    border: 0.013rem solid #282828;
     border-radius: 1.563rem;
     height: 0.406rem;
     cursor: pointer;
@@ -142,7 +162,10 @@ input[type=range] {
     cursor: pointer;
 }
 /* --------------------PLAYLIST-------------------- */
-
+.playlist {
+    max-height: 14em;
+    overflow: auto;
+}
 .buttons.flex {
     align-items:center;
     margin: 1rem 0;
@@ -153,6 +176,7 @@ input[type=range] {
 }
 .track img {
     width: 20%;
+    max-width: 5em;
     margin:0.5rem
 }
 .track-info {
@@ -172,11 +196,55 @@ input[type=range] {
 .track-info .artist-name {
     grid-row: 2;
     grid-column: 1/ span 3;
+    color: rgba(255,255,255, 0.7);
 }
 .track-info .track-length {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     grid-column: 4;
     grid-row: 1/span 2;
+    color: rgba(255,255,255, 0.7);
+}
+.track.active {
+    background:rgba(255,255,255, 0.1)
+}
+
+@media only screen and (min-width:50em) {
+    h1 {
+        font-size: 3.052rem;
+    }
+    
+    h2 {font-size: 2.441rem;}
+    
+    h3 {font-size: 1.953rem;}
+    
+    h4 {font-size: 1.563rem;}
+    
+    h5 {font-size: 1.25rem;}
+    
+    small, .text_small {
+        font-size: 0.8rem;
+    }
+    main {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 100vh;
+        width: 90%;
+        margin:auto;
+        gap: 1rem;
+    }
+    .container {
+        width: 50%
+    }
+    img {
+        width: 100%;
+        max-width: 20em;
+    }
+    .playlist {
+        max-height: 40em;
+        overflow: auto;
+    }
+
 }
