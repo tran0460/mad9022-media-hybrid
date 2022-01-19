@@ -188,6 +188,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 /* --------------------PLAYLIST-------------------- */
 .playlist {
+    list-style-type: none;
     max-height: 14em;
     overflow: auto;
 }
@@ -238,6 +239,7 @@ input[type=range]:focus::-ms-fill-upper {
 @media only screen and (min-width:50em) {
     h1 {
         font-size: 3.052rem;
+        margin: 0;
     }
     h2 {font-size: 2.441rem;}
     
