@@ -51,11 +51,16 @@ h2 {
     color: rgba(255,255,255, 0.7);
     margin: 1rem;
 }
+.big-thumb{
+    filter: brightness(0.4);
+}
 /* --------------------CONTROLS-------------------- */
 .controls {
     display: flex;
     flex-direction:column;
     align-items:center;
+    max-width: 30rem;
+    margin: auto;
 }
 #progress-bar {
     display: flex;
