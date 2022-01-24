@@ -237,8 +237,12 @@ input[type=range]:focus::-ms-fill-upper {
     grid-row: 1/span 2;
     color: rgba(255,255,255, 0.7);
 }
-.track.active {
+li.active {
     background:rgba(255,255,255, 0.1)
+}
+li:hover{
+    background:rgba(255,255,255, 0.1);
+    cursor: pointer;
 }
 
 @media only screen and (min-width:50em) {

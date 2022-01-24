@@ -18,7 +18,7 @@
     <main>
         <section id="player-area" class="container">
             <div class="visual">
-                <img src="./media/thumbnail/careless_whisper-george-michael.jpeg" alt="track-name">
+                <img id="big-thumbnail" src="./media/thumbnail/careless_whisper-george-michael.jpeg" alt="track-name">
                 <h2 class="track-name">Careless Whisper</h2>
                 <p class="artist-name">George Michael</p>
                 <div id="audio-animation">(This is the audio animation bar)</div>
@@ -26,30 +26,30 @@
             <div class="controls">
                 <div id="progress-bar">
                     <audio id="player" class="hidden"></audio>
-                    <time class="current-time">00:00</time>
-                    <time class="total-time">00:00</time>
+                    <time id = "current-time"class="current-time">0:00</time>
+                    <time id = "total-time"class="total-time">0:00</time>
                     <input id="length-bar" type="range">
                 </div>
                 <div class="player-buttons">
-                    <button id="btn" class="buttons">
+                    <button id="btnSkipPrevious" class="buttons">
                         <span id="skip_previous" class="material-icons">skip_previous</span>
                     </button>
-                    <button id="btn" class="buttons">
+                    <button id="btnReplay10" class="buttons">
                         <span id="replay_10" class="material-icons">replay_10</span>
                     </button>
-                    <button id="btn" class="buttons">
+                    <button id="btnPlay" class="buttons">
                         <span id="play_arrow" class="material-icons">play_arrow</span>
                     </button>
-                    <button id="btn" class="buttons">
+                    <button id="btnPause" class="buttons">
                         <span id="pause" class="material-icons">pause</span>
                     </button>
-                    <button id="btn" class="buttons">
+                    <button id="btnStop" class="buttons">
                         <span id="stop" class="material-icons">stop</span>
                     </button>
-                    <button id="btn" class="buttons">
+                    <button id="btnForward10" class="buttons">
                         <span id="forward_10" class="material-icons">forward_10</span>
                     </button>
-                    <button id="btn" class="buttons">
+                    <button id="btnSkipNext" class="buttons">
                         <span id="skip_next" class="material-icons">skip_next</span>
                     </button>
                 </div>
@@ -62,7 +62,7 @@
             </button>
             <ol class="playlist">
                 <li>
-                    <div class="track active">
+                    <div class="track">
                         <img src="./media/thumbnail/careless_whisper-george-michael.jpeg" alt="track-name" class="playlist-thumbnail">
                         <div class="track-info">
                             <p class="track-name">Careless Whisper</p>
@@ -134,5 +134,7 @@
             </ol>
         </section>
     </main>
+    <script src="js/playlist.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
