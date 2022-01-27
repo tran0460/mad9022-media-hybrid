@@ -99,9 +99,17 @@ const VISUAL = {
     changeSong: (name) => {
         CONTROL.findTrackIndex(name)
         CONTROL.pause()
+        let tracks = document.querySelectorAll('li')
         if (document.querySelector('.active')) {
             document.querySelector('.active').classList.remove('active')
         }
+        tracks.forEach(track => {
+            let trackName = track.querySelector('.track-name').textContent
+            if (trackName === name) {
+                track.classList.add('active')
+                }
+            }
+        )
         playlist.forEach(track => {
             if (track.title == name) {
                 document.getElementById('big-thumbnail').src = track.img
