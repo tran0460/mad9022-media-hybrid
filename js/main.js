@@ -1,21 +1,9 @@
 const CONTROL = {
     player: document.getElementById('player'),
     currentTrack: 0,
-    totalTime: (number) => {
-        let divide = number / 60
-        let convertDecimal = divide.toFixed(2)
-        return join = convertDecimal.split('.').join(':')
-    },
-    currentTime: (number) => {
-            let divide = number / 100
-            let convertDecimal = divide.toFixed(2)              
-            return join = convertDecimal.split('.').join(':')
-
-            //this function is not fully functional
-    },
     init: () => {
         let tracks = document.querySelectorAll('li')
-        tracks.forEach(track => track.addEventListener('click',VISUAL.changeSong))
+        tracks.forEach(track => track.addEventListener('click',VISUAL.chooseSong))
 
         document.getElementById('btnPause').classList.add('hidden')
         
@@ -34,19 +22,53 @@ const CONTROL = {
         CONTROL.player.addEventListener('durationchange', CONTROL.updateTotalTime);
         CONTROL.player.addEventListener('timeupdate', CONTROL.updateCurrentTime);
         
-        console.log('init')
+        let songName = playlist[CONTROL.currentTrack].title
+        VISUAL.changeSong(songName)
     },
-    playNextTrack: () => {},
+    findTrackIndex: (name) => { 
+        let i = -1
+        playlist.forEach(track => {
+            i++
+            if (track.title == name) {
+                CONTROL.currentTrack = i
+                console.log(CONTROL.currentTrack)
+            }
+        })
+    },
+    convertTime: (time) => {
+        let minutes = Math.floor(time / 60);
+        let seconds = time - minutes * 60;
+        if (seconds < 10) seconds = `0${seconds}`
+        if (seconds.toFixed(1) < 5) 
+        seconds = Math.floor(seconds)
+        seconds = Math.ceil(seconds)
+        return  `${minutes}:${seconds}`
+        // let convertDecimal = divide.toFixed(2)
+        // return join = convertDecimal.split('.').join(':')
+    },
+    // currentTime: (number) => {
+    //         let divide = number / 60
+    //         let convertDecimal = divide.toFixed(2)              
+    //         return join = convertDecimal.split('.').join(':')
+    //         //this function is not fully functional
+    // },
+    playNextTrack: () => {
+    },
     startAnimations: () => {},
     updateTotalTime: () => {
-        document.getElementById('total-time').innerHTML = CONTROL.totalTime(CONTROL.player.duration)
+        document.getElementById('total-time').innerHTML = CONTROL.convertTime(CONTROL.player.duration)
     },
     updateCurrentTime: () => {
-        let currentTime = CONTROL.currentTime(CONTROL.player.currentTime )
-        document.getElementById('current-time').innerHTML = currentTime
+        // let currentTime = CONTROL.currentTime(CONTROL.player.currentTime )
+        // document.getElementById('current-time').innerHTML = currentTime
     },
-    skipPrevious: () => {},
-    replay10: () => {},
+    skipPrevious: () => {
+        let prevSongName = playlist[CONTROL.currentTrack - 1].title
+        VISUAL.changeSong(prevSongName)
+    },
+    replay10: () => {
+        CONTROL.player.currentTime -= 10
+    },
     play: () => {
         player.play()
         document.getElementById('btnPlay').classList.add('hidden')
@@ -62,20 +84,32 @@ const CONTROL = {
         CONTROL.player.pause()
         CONTROL.player.currentTime = 0
     },
-    forward10: () => {},
-    skipNext: () => {},
+    forward10: () => {
+        CONTROL.player.currentTime += 10
+    },
+    skipNext: () => {
+        if (CONTROL.currentTrack === playlist.length) {
+            VISUAL.changeSong(playlist[CONTROL.currentTrack ].title)
+        } else {
+            VISUAL.changeSong(playlist[CONTROL.currentTrack + 1].title)
+        }
+    },
 }
 
 const VISUAL = {
-    changeSong: (ev) => {
+    chooseSong: (ev) => {
         let trackName = ev.currentTarget.querySelector('.track-name').textContent
+        ev.currentTarget.classList.add('active')
+        VISUAL.changeSong(trackName)
+    },
+    changeSong: (name) => {
+        CONTROL.findTrackIndex(name)
         CONTROL.pause()
         if (document.querySelector('.active')) {
             document.querySelector('.active').classList.remove('active')
         }
-        ev.currentTarget.classList.add('active')
         playlist.forEach(track => {
-            if (track.title == trackName) {
+            if (track.title == name) {
                 document.getElementById('big-thumbnail').src = track.img
                 document.querySelector('h2').textContent = track.title
                 document.querySelector('p').textContent = track.artist
