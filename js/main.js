@@ -37,21 +37,15 @@ const CONTROL = {
     },
     convertTime: (time) => {
         let minutes = Math.floor(time / 60);
-        let seconds = time - minutes * 60;
-        if (seconds < 10) seconds = `0${seconds}`
-        if (seconds.toFixed(1) < 5) 
-        seconds = Math.floor(seconds)
-        seconds = Math.ceil(seconds)
+        let seconds = Math.floor(time - minutes * 60);
+        if (seconds < 10) {
+            seconds = `0${seconds}`
+        } if (seconds == 60) {
+            seconds = `00`
+            minutes += 1
+        }
         return  `${minutes}:${seconds}`
-        // let convertDecimal = divide.toFixed(2)
-        // return join = convertDecimal.split('.').join(':')
     },
-    // currentTime: (number) => {
-    //         let divide = number / 60
-    //         let convertDecimal = divide.toFixed(2)              
-    //         return join = convertDecimal.split('.').join(':')
-    //         //this function is not fully functional
-    // },
     playNextTrack: () => {
     },
     startAnimations: () => {},
@@ -59,8 +53,8 @@ const CONTROL = {
         document.getElementById('total-time').innerHTML = CONTROL.convertTime(CONTROL.player.duration)
     },
     updateCurrentTime: () => {
-        // let currentTime = CONTROL.currentTime(CONTROL.player.currentTime )
-        // document.getElementById('current-time').innerHTML = currentTime
+        let currentTime = CONTROL.player.currentTime
+        document.getElementById('current-time').innerHTML = CONTROL.convertTime(currentTime)
     },
     skipPrevious: () => {
         let prevSongName = playlist[CONTROL.currentTrack - 1].title
