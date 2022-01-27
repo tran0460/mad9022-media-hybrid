@@ -2,11 +2,12 @@ const CONTROL = {
     player: document.getElementById('player'),
     currentTrack: 0,
     init: () => {
+        //add listeners to each li 
         let tracks = document.querySelectorAll('li')
         tracks.forEach(track => track.addEventListener('click',VISUAL.chooseSong))
-
+        // hiding pause button as default
         document.getElementById('btnPause').classList.add('hidden')
-        
+        //control buttons
         document.getElementById('btnSkipPrevious').addEventListener('click',CONTROL.skipPrevious)
         document.getElementById('btnReplay10').addEventListener('click',CONTROL.replay10)
         document.getElementById('btnPlay').addEventListener('click',CONTROL.play)
@@ -14,14 +15,12 @@ const CONTROL = {
         document.getElementById('btnStop').addEventListener('click',CONTROL.stop)
         document.getElementById('btnForward10').addEventListener('click',CONTROL.forward10)
         document.getElementById('btnSkipNext').addEventListener('click',CONTROL.skipNext)
-        
-        CONTROL.player.src = playlist[CONTROL.currentTrack].src
-        
+        //background features
         CONTROL.player.addEventListener('ended', CONTROL.playNextTrack);
         CONTROL.player.addEventListener('play', CONTROL.startAnimations);
         CONTROL.player.addEventListener('durationchange', CONTROL.updateTotalTime);
         CONTROL.player.addEventListener('timeupdate', CONTROL.updateCurrentTime);
-        
+        //make the first song of the list the default
         let songName = playlist[CONTROL.currentTrack].title
         VISUAL.changeSong(songName)
     },
@@ -47,6 +46,9 @@ const CONTROL = {
         return  `${minutes}:${seconds}`
     },
     playNextTrack: () => {
+        if (CONTROL.player.currentTime == CONTROL.player.duration) 
+        CONTROL.skipNext()
+        CONTROL.play()
     },
     startAnimations: () => {},
     updateTotalTime: () => {
@@ -57,8 +59,7 @@ const CONTROL = {
         document.getElementById('current-time').innerHTML = CONTROL.convertTime(currentTime)
     },
     skipPrevious: () => {
-        let prevSongName = playlist[CONTROL.currentTrack - 1].title
-        VISUAL.changeSong(prevSongName)
+        VISUAL.changeSong(playlist[CONTROL.currentTrack - 1].title)
     },
     replay10: () => {
         CONTROL.player.currentTime -= 10
@@ -82,23 +83,23 @@ const CONTROL = {
         CONTROL.player.currentTime += 10
     },
     skipNext: () => {
-        if (CONTROL.currentTrack === playlist.length) {
-            VISUAL.changeSong(playlist[CONTROL.currentTrack ].title)
-        } else {
-            VISUAL.changeSong(playlist[CONTROL.currentTrack + 1].title)
-        }
+        VISUAL.changeSong(playlist[CONTROL.currentTrack + 1].title)
     },
 }
 
 const VISUAL = {
     chooseSong: (ev) => {
+        //get the name of the song your are clicking on, pass it to the changeSong function
         let trackName = ev.currentTarget.querySelector('.track-name').textContent
         ev.currentTarget.classList.add('active')
         VISUAL.changeSong(trackName)
     },
     changeSong: (name) => {
+        //update currentTrack
         CONTROL.findTrackIndex(name)
+        //pause if media player is running
         CONTROL.pause()
+        //remove active class if there is one
         let tracks = document.querySelectorAll('li')
         if (document.querySelector('.active')) {
             document.querySelector('.active').classList.remove('active')
