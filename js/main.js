@@ -2,6 +2,8 @@ const CONTROL = {
     player: document.getElementById('player'),
     currentTrack: 0,
     init: () => {
+        //create the playlist
+        VISUAL.createPlaylist()
         //add listeners to each li 
         let tracks = document.querySelectorAll('li')
         tracks.forEach(track => track.addEventListener('click',VISUAL.chooseSong))
@@ -114,10 +116,42 @@ const VISUAL = {
         playlist.forEach(track => {
             if (track.title == name) {
                 document.getElementById('big-thumbnail').src = track.img
+                document.getElementById('big-thumbnail').alt = track.title
                 document.querySelector('h2').textContent = track.title
                 document.querySelector('p').textContent = track.artist
                 CONTROL.player.src = track.src
             }
+        })
+    },
+    createPlaylist: () => {
+        playlist.forEach(track => {
+            let li = document.createElement('li');
+
+            let trackDiv = document.createElement('div')
+            trackDiv.classList.add('track')
+
+            let thumbnail = document.createElement('img')
+            thumbnail.src = track.img
+            thumbnail.alt = track.img
+
+            let trackInfo = document.createElement('div')
+            trackInfo.classList.add('track-info')
+
+            let trackName = document.createElement('p')
+            trackName.classList.add('track-name')
+            trackName.textContent = track.title
+
+            let artistName = document.createElement('p')
+            artistName.classList.add('artist-name')
+            artistName.textContent = track.artist
+
+            let trackLength = document.createElement('p')
+            trackLength.classList.add('track-length')
+
+            trackInfo.append(trackName, artistName, trackLength)
+            trackDiv.append(thumbnail, trackInfo)
+            li.append(trackDiv)
+            document.querySelector('.playlist').append(li)
         })
     }
 }
