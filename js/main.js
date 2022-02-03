@@ -76,6 +76,7 @@ const CONTROL = {
         CONTROL.player.pause()
         document.getElementById('btnPause').classList.add('hidden')
         document.getElementById('btnPlay').classList.remove('hidden')
+        document.getElementById('audio-animation').classList.remove('play-animation')
     },
     stop: () => {
         CONTROL.player.pause()
