@@ -217,6 +217,7 @@ input[type=range]:focus::-ms-fill-upper {
     margin: 1rem 0;
     gap: 0.5rem;
     flex-grow: 2;
+    pointer-events: none;
 }
 .track-info p {
     margin: 0;

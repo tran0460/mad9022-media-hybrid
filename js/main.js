@@ -5,8 +5,9 @@ const CONTROL = {
         //create the playlist
         VISUAL.createPlaylist()
         //add listeners to each li 
-        let tracks = document.querySelectorAll('li')
-        tracks.forEach(track => track.addEventListener('click',VISUAL.chooseSong))
+        // let tracks = document.querySelectorAll('li')
+        // tracks.forEach(track => track.addEventListener('click',VISUAL.chooseSong))
+        document.querySelector('.playlist').addEventListener('click', VISUAL.chooseSong)
         // hiding pause button as default
         document.getElementById('btnPause').classList.add('hidden')
         //control buttons
@@ -27,9 +28,7 @@ const CONTROL = {
         VISUAL.changeSong(songName)
     },
     findTrackIndex: (name) => { 
-        let i = -1
-        playlist.forEach(track => {
-            i++
+        playlist.forEach((track,i) => {
             if (track.title == name) {
                 CONTROL.currentTrack = i
                 console.log(CONTROL.currentTrack)
@@ -93,9 +92,10 @@ const CONTROL = {
 const VISUAL = {
     chooseSong: (ev) => {
         //get the name of the song your are clicking on, pass it to the changeSong function
-        let trackName = ev.currentTarget.querySelector('.track-name').textContent
+        let trackName = ev.target.querySelector('.track-name').textContent
         ev.currentTarget.classList.add('active')
         VISUAL.changeSong(trackName)
+        CONTROL.play()
     },
     changeSong: (name) => {
         //update currentTrack
@@ -104,9 +104,7 @@ const VISUAL = {
         CONTROL.pause()
         //remove active class if there is one
         let tracks = document.querySelectorAll('li')
-        if (document.querySelector('.active')) {
-            document.querySelector('.active').classList.remove('active')
-        }
+        tracks.forEach(track => track.classList.remove('active'))
         tracks.forEach(track => {
             let trackName = track.querySelector('.track-name').textContent
             if (trackName === name) {
@@ -127,31 +125,16 @@ const VISUAL = {
     createPlaylist: () => {
         playlist.forEach(track => {
             let li = document.createElement('li');
-
-            let trackDiv = document.createElement('div')
-            trackDiv.classList.add('track')
-
-            let thumbnail = document.createElement('img')
-            thumbnail.src = track.img
-            thumbnail.alt = track.img
-
-            let trackInfo = document.createElement('div')
-            trackInfo.classList.add('track-info')
-
-            let trackName = document.createElement('p')
-            trackName.classList.add('track-name')
-            trackName.textContent = track.title
-
-            let artistName = document.createElement('p')
-            artistName.classList.add('artist-name')
-            artistName.textContent = track.artist
-
-            let trackLength = document.createElement('p')
-            trackLength.classList.add('track-length')
-
-            trackInfo.append(trackName, artistName, trackLength)
-            trackDiv.append(thumbnail, trackInfo)
-            li.append(trackDiv)
+            li.innerHTML = 
+            `
+            <div class="track">
+            <img src= ${track.img} alt= ${track.img}>
+                <div class="track-info">
+                <p class="track-name">${track.title}</p>
+                <p class="artist-name">${track.artist}</p>
+                </div>
+            </div>
+            `
             document.querySelector('.playlist').append(li)
         })
     }
