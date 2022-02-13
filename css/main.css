@@ -54,6 +54,10 @@ h2 {
 .big-thumb{
     filter: brightness(0.4);
 }
+.disable {
+    opacity: 0.4;
+    pointer-events: none;
+}
 /* --------------------CONTROLS-------------------- */
 .controls {
     display: flex;

@@ -4,34 +4,53 @@ const CONTROL = {
     init: () => {
         //create the playlist
         VISUAL.createPlaylist()
-        //add listeners to each li 
-        // let tracks = document.querySelectorAll('li')
-        // tracks.forEach(track => track.addEventListener('click',VISUAL.chooseSong))
-        document.querySelector('.playlist').addEventListener('click', VISUAL.chooseSong)
         // hiding pause button as default
         document.getElementById('btnPause').classList.add('hidden')
-        //control buttons
-        document.getElementById('btnSkipPrevious').addEventListener('click',CONTROL.skipPrevious)
-        document.getElementById('btnReplay10').addEventListener('click',CONTROL.replay10)
-        document.getElementById('btnPlay').addEventListener('click',CONTROL.play)
-        document.getElementById('btnPause').addEventListener('click',CONTROL.pause)
-        document.getElementById('btnStop').addEventListener('click',CONTROL.stop)
-        document.getElementById('btnForward10').addEventListener('click',CONTROL.forward10)
-        document.getElementById('btnSkipNext').addEventListener('click',CONTROL.skipNext)
-        //background features
+        //make the first song of the list the default
+        let songName = playlist[CONTROL.currentTrack].title
+        VISUAL.changeSong(songName)
+        CONTROL.addListeners();
+    },
+    addListeners: () => {
+        // add listeners to the playlist
+        document.querySelector('.playlist').addEventListener('click', VISUAL.chooseSong)
+        // add listeners to control buttons
+        document.querySelector('.player-buttons').addEventListener('click', CONTROL.handleClick)
+        // automatic features
         CONTROL.player.addEventListener('ended', CONTROL.playNextTrack);
         CONTROL.player.addEventListener('play', CONTROL.startAnimations);
         CONTROL.player.addEventListener('durationchange', CONTROL.updateTotalTime);
         CONTROL.player.addEventListener('timeupdate', CONTROL.updateCurrentTime);
-        //make the first song of the list the default
-        let songName = playlist[CONTROL.currentTrack].title
-        VISUAL.changeSong(songName)
+    },
+    handleClick: (ev) => {
+        switch (ev.target.id) {
+            case 'skip_previous':
+                CONTROL.skipPrevious();
+                break;
+            case 'replay_10':
+                CONTROL.replay10();
+                break;
+            case 'play_arrow':
+                CONTROL.play();
+                break;
+            case 'pause':
+                CONTROL.pause();
+                break;
+            case 'stop':
+                CONTROL.stop();
+                break;
+            case 'forward_10':
+                CONTROL.forward10();
+                break;
+            case 'skip_next':
+                CONTROL.skipNext();
+                break;
+        }
     },
     findTrackIndex: (name) => { 
         playlist.forEach((track,i) => {
             if (track.title == name) {
                 CONTROL.currentTrack = i
-                console.log(CONTROL.currentTrack)
             }
         })
     },
@@ -61,6 +80,7 @@ const CONTROL = {
     },
     skipPrevious: () => {
         VISUAL.changeSong(playlist[CONTROL.currentTrack - 1].title)
+        CONTROL.play()
     },
     replay10: () => {
         CONTROL.player.currentTime -= 10
@@ -100,6 +120,18 @@ const VISUAL = {
     changeSong: (name) => {
         //update currentTrack
         CONTROL.findTrackIndex(name)
+        //if the track is the first one in the list, disable skip previous and likewise
+        if (CONTROL.currentTrack === 0 || CONTROL.currentTrack === playlist.length - 1) {     
+            if (document.querySelector('.disable'))document.querySelector('.disable').classList.remove('disable')
+            switch (CONTROL.currentTrack) {
+                case 0:
+                    document.getElementById('skip_previous').classList.add('disable');
+                    break;
+                case  playlist.length - 1:
+                    document.getElementById('skip_next').classList.add('disable');
+                    break;
+            }
+        }
         //pause if media player is running
         CONTROL.pause()
         //remove active class if there is one
