@@ -106,6 +106,7 @@ const CONTROL = {
     },
     skipNext: () => {
         VISUAL.changeSong(playlist[CONTROL.currentTrack + 1].title)
+        CONTROL.play()
     },
 }
 
