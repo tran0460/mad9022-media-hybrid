@@ -149,6 +149,7 @@ const VISUAL = {
         CONTROL.play()
     },
     createPlaylist: () => {
+        let df = new DocumentFragment
         playlist.forEach(track => {
             let li = document.createElement('li');
             li.innerHTML = 
@@ -161,8 +162,9 @@ const VISUAL = {
                 </div>
             </div>
             `
-            document.querySelector('.playlist').append(li)
+            df.append(li)
         })
+        document.querySelector('.playlist').append(df)
     }
 }
 
