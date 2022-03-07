@@ -72,10 +72,12 @@ const CONTROL = {
     },
     startAnimations: () => {},
     updateTotalTime: () => {
+        document.querySelector('progress').max = CONTROL.player.duration
         document.getElementById('total-time').innerHTML = CONTROL.convertTime(CONTROL.player.duration)
     },
     updateCurrentTime: () => {
         let currentTime = CONTROL.player.currentTime
+        document.querySelector('progress').value = currentTime
         document.getElementById('current-time').innerHTML = CONTROL.convertTime(currentTime)
     },
     skipPrevious: () => {
