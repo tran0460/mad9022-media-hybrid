@@ -79,7 +79,11 @@ const CONTROL = {
         document.getElementById('current-time').innerHTML = CONTROL.convertTime(currentTime)
     },
     skipPrevious: () => {
-        VISUAL.changeSong(playlist[CONTROL.currentTrack - 1].title)
+        if (CONTROL.currentTrack === 0) {
+        VISUAL.changeSong(playlist[playlist.length - 1].title)
+        } else {
+            VISUAL.changeSong(playlist[CONTROL.currentTrack - 1].title)
+        }
         CONTROL.play()
     },
     replay10: () => {
@@ -105,7 +109,11 @@ const CONTROL = {
         CONTROL.player.currentTime += 10
     },
     skipNext: () => {
-        VISUAL.changeSong(playlist[CONTROL.currentTrack + 1].title)
+        if (CONTROL.currentTrack === playlist.length - 1) {
+        VISUAL.changeSong(playlist[0].title)
+        } else  {
+            VISUAL.changeSong(playlist[CONTROL.currentTrack + 1].title)
+        }
         CONTROL.play()
     },
 }
@@ -120,21 +128,6 @@ const VISUAL = {
     changeSong: (name) => {
         //update currentTrack
         CONTROL.findTrackIndex(name)
-        //if the track is the first one in the list, disable skip previous and likewise
-        if (CONTROL.currentTrack === 0 || CONTROL.currentTrack === playlist.length - 1) {     
-            if (document.querySelector('.disable'))document.querySelector('.disable').classList.remove('disable')
-            switch (CONTROL.currentTrack) {
-                case 0:
-                    document.getElementById('skip_previous').classList.add('disable');
-                    break;
-                    case  playlist.length - 1:
-                        document.getElementById('skip_next').classList.add('disable');
-                        break;
-                    }
-                }
-                //pause if media player is running
-                CONTROL.pause()
-                //remove active class if there is one
                 let tracks = document.querySelectorAll('li')
                 tracks.forEach(track => track.classList.remove('active'))
                 tracks.forEach(track => {
