@@ -115,7 +115,6 @@ const VISUAL = {
         let trackName = ev.target.querySelector('.track-name').textContent
         ev.currentTarget.classList.add('active')
         VISUAL.changeSong(trackName)
-        CONTROL.play()
     },
     changeSong: (name) => {
         //update currentTrack
@@ -127,32 +126,33 @@ const VISUAL = {
                 case 0:
                     document.getElementById('skip_previous').classList.add('disable');
                     break;
-                case  playlist.length - 1:
-                    document.getElementById('skip_next').classList.add('disable');
-                    break;
-            }
-        }
-        //pause if media player is running
-        CONTROL.pause()
-        //remove active class if there is one
-        let tracks = document.querySelectorAll('li')
-        tracks.forEach(track => track.classList.remove('active'))
-        tracks.forEach(track => {
-            let trackName = track.querySelector('.track-name').textContent
-            if (trackName === name) {
-                track.classList.add('active')
+                    case  playlist.length - 1:
+                        document.getElementById('skip_next').classList.add('disable');
+                        break;
+                    }
                 }
-            }
-        )
-        playlist.forEach(track => {
-            if (track.title == name) {
-                document.getElementById('big-thumbnail').src = track.img
-                document.getElementById('big-thumbnail').alt = track.title
-                document.querySelector('h2').textContent = track.title
-                document.querySelector('p').textContent = track.artist
-                CONTROL.player.src = track.src
-            }
-        })
+                //pause if media player is running
+                CONTROL.pause()
+                //remove active class if there is one
+                let tracks = document.querySelectorAll('li')
+                tracks.forEach(track => track.classList.remove('active'))
+                tracks.forEach(track => {
+                    let trackName = track.querySelector('.track-name').textContent
+                    if (trackName === name) {
+                        track.classList.add('active')
+                    }
+                }
+                )
+                playlist.forEach(track => {
+                    if (track.title == name) {
+                        document.getElementById('big-thumbnail').src = track.img
+                        document.getElementById('big-thumbnail').alt = track.title
+                        document.querySelector('h2').textContent = track.title
+                        document.querySelector('p').textContent = track.artist
+                        CONTROL.player.src = track.src
+                    }
+                })
+        CONTROL.play()
     },
     createPlaylist: () => {
         playlist.forEach(track => {
