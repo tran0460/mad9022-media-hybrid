@@ -70,7 +70,12 @@ const CONTROL = {
         CONTROL.skipNext()
         CONTROL.play()
     },
-    startAnimations: () => {},
+    startAnimations: () => {
+        document.getElementById('big-thumbnail').classList.add('play-animation')
+    },
+    stopAnimations: () => {
+        document.getElementById('big-thumbnail').classList.remove('play-animation')
+    },
     updateTotalTime: () => {
         document.querySelector('progress').max = CONTROL.player.duration
         document.getElementById('total-time').innerHTML = CONTROL.convertTime(CONTROL.player.duration)
@@ -95,13 +100,13 @@ const CONTROL = {
         player.play()
         document.getElementById('btnPlay').classList.add('hidden')
         document.getElementById('btnPause').classList.remove('hidden')
-        document.getElementById('audio-animation').classList.add('play-animation')
+        CONTROL.startAnimations()
     },
     pause: () => {
         CONTROL.player.pause()
         document.getElementById('btnPause').classList.add('hidden')
         document.getElementById('btnPlay').classList.remove('hidden')
-        document.getElementById('audio-animation').classList.remove('play-animation')
+        CONTROL.stopAnimations()
     },
     stop: () => {
         CONTROL.player.pause()
