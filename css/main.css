@@ -42,6 +42,7 @@ img {
   text-align: center;
 }
 .visual img {
+  border-radius: 50%;
   margin: 1rem auto;
 }
 h2 {
@@ -116,16 +117,11 @@ progress {
 }
 /* --------------------ANIMATION-------------------- */
 .animation {
-  animation: circle 0.5s forwards, spin 20s 0.5s linear infinite;
+  animation: spin 20s 0.5s linear infinite;
   animation-play-state: paused;
 }
 .animation.play {
   animation-play-state: running;
-}
-@keyframes circle {
-  100% {
-    border-radius: 50%;
-  }
 }
 @keyframes spin {
   100% {
