@@ -71,10 +71,10 @@ const CONTROL = {
         CONTROL.play()
     },
     startAnimations: () => {
-        document.getElementById('big-thumbnail').classList.add('play-animation')
+        document.querySelector('.animation').classList.add('play')
     },
     stopAnimations: () => {
-        document.getElementById('big-thumbnail').classList.remove('play-animation')
+        document.querySelector('.animation').classList.remove('play')
     },
     updateTotalTime: () => {
         document.querySelector('progress').max = CONTROL.player.duration

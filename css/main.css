@@ -115,8 +115,12 @@ progress {
   cursor: pointer;
 }
 /* --------------------ANIMATION-------------------- */
-.play-animation {
+.animation {
   animation: circle 0.5s forwards, spin 20s 0.5s linear infinite;
+  animation-play-state: paused;
+}
+.animation.play {
+  animation-play-state: running;
 }
 @keyframes circle {
   100% {
