@@ -45,6 +45,12 @@ const CONTROL = {
             case 'skip_next':
                 CONTROL.skipNext();
                 break;
+            case 'mute':
+                CONTROL.mute();
+                break;
+            case 'unmute':
+                CONTROL.unmute();
+                break;
         }
     },
     findTrackIndex: (name) => { 
@@ -123,6 +129,16 @@ const CONTROL = {
         }
         CONTROL.play()
     },
+    mute: () => {
+        CONTROL.player.muted = !CONTROL.player.muted
+        document.getElementById('btnMute').classList.add('hidden')
+        document.getElementById('btnUnmute').classList.remove('hidden')
+    },
+    unmute: () => {
+        CONTROL.player.muted = !CONTROL.player.muted
+        document.getElementById('btnMute').classList.remove('hidden')
+        document.getElementById('btnUnmute').classList.add('hidden')
+    }
 }
 
 const VISUAL = {
