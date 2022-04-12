@@ -1,14 +1,14 @@
 const CONTROL = {
     player: document.getElementById('player'),
     currentTrack: 0,
-    init: () => {
+    init: async () => {
         //create the playlist
         VISUAL.createPlaylist()
         // hiding pause button as default
         document.getElementById('btnPause').classList.add('hidden')
         //make the first song of the list the default
         let songName = playlist[CONTROL.currentTrack].title
-        VISUAL.changeSong(songName)
+        await VISUAL.changeSong(songName)
         CONTROL.addListeners();
     },
     addListeners: () => {
@@ -142,11 +142,12 @@ const CONTROL = {
 }
 
 const VISUAL = {
-    chooseSong: (ev) => {
+    chooseSong: async (ev) => {
         //get the name of the song your are clicking on, pass it to the changeSong function
         let trackName = ev.target.querySelector('.track-name').textContent
         ev.currentTarget.classList.add('active')
-        VISUAL.changeSong(trackName)
+        await VISUAL.changeSong(trackName)
+        CONTROL.play();
     },
     changeSong: (name) => {
         //update currentTrack
@@ -169,7 +170,6 @@ const VISUAL = {
                         CONTROL.player.src = track.src
                     }
                 })
-        CONTROL.play()
     },
     createPlaylist: () => {
         let df = new DocumentFragment
@@ -191,4 +191,4 @@ const VISUAL = {
     }
 }
 
-CONTROL.init()
+document.addEventListener('DOMContentLoaded',CONTROL.init())
